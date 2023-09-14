@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="BankOfMerica.BMView.Login"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BankOfMerica.BMView" xmlns:bmviewmodel="clr-namespace:BoMurica.BMViewModel" d:DataContext="{d:DesignInstance Type=bmviewmodel:LoginViewModel}"
+             xmlns:bmcommands="clr-namespace:BoMurica.BMCommands"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="360" >
+
+
+    <Grid Background="LightGray">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <TextBlock  
+            Grid.Row="0"
+            FontSize="20"
+            Margin="0 30 0 20"
+            Text="Bank of Murica"
+            TextAlignment="Center"/>
+        
+        <Grid Grid.Row="1" Margin="50 0 50 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="User Code:" />
+            <TextBox
+                Grid.Row="1"
+                Margin="0 10 0 0"
+                Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" />
+        </Grid>
+
+        <Grid Grid.Row="2" Margin="50 0 50 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="User Password:" />
+            <TextBox
+                Grid.Row="1"
+                Margin="0 10 0 0"
+                Text="{Binding Pass, UpdateSourceTrigger=PropertyChanged}" 
+                />
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Button 
+                Name="LoginBtn" 
+                Content="Login" 
+                Margin="150,20,150,0" 
+                Height="20" 
+                Grid.RowSpan="2" 
+                VerticalAlignment="Top" 
+                Command="{Binding LoginCommand}" 
+                CommandParameter="{Binding Creds}"/>
+        </Grid>
+    </Grid>
+
+
+
+</UserControl>

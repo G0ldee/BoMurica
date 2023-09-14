@@ -1,0 +1,676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BomDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminInfo">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FirstName" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="char" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AdminLoginCred">
+          <Key>
+            <PropertyRef Name="CredentialsID" />
+          </Key>
+          <Property Name="CredentialsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminID" Type="varchar" MaxLength="10" />
+          <Property Name="UserCode" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="AdPassword" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ATMs">
+          <Key>
+            <PropertyRef Name="AtmID" />
+          </Key>
+          <Property Name="AtmID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Supply" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CheckingAccounts">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientID" Type="varchar" MaxLength="10" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientInfo">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FirstName" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="LastName" Type="char" MaxLength="25" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientLoginCred">
+          <Key>
+            <PropertyRef Name="CredewntialID" />
+          </Key>
+          <Property Name="CredewntialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="varchar" MaxLength="10" />
+          <Property Name="UserCode" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ClPassword" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CreditLineAccounts">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientID" Type="varchar" MaxLength="10" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MortgageAccounts">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientID" Type="varchar" MaxLength="10" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SavingAccounts">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ClientID" Type="varchar" MaxLength="10" />
+          <Property Name="Balance" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SuspendedAccounts">
+          <Key>
+            <PropertyRef Name="CaseId" />
+          </Key>
+          <Property Name="CaseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="varchar" MaxLength="10" />
+          <Property Name="AccountID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="AdminID" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientID" Type="varchar" MaxLength="10" />
+          <Property Name="AccountID" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Outbound" Type="bit" Nullable="false" />
+          <Property Name="Receiver" Type="varchar" MaxLength="10" />
+          <Property Name="EventTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__AdminLogi__Admin__182C9B23">
+          <End Role="AdminInfo" Type="Self.AdminInfo" Multiplicity="0..1" />
+          <End Role="AdminLoginCred" Type="Self.AdminLoginCred" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminInfo">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="AdminLoginCred">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CheckingA__Clien__21B6055D">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="CheckingAccounts" Type="Self.CheckingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="CheckingAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientLog__Clien__1CF15040">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="ClientLoginCred" Type="Self.ClientLoginCred" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClientLoginCred">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CreditLin__Clien__300424B4">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="CreditLineAccounts" Type="Self.CreditLineAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="CreditLineAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MortgageA__Clien__2B3F6F97">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="MortgageAccounts" Type="Self.MortgageAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="MortgageAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavingAcc__Clien__267ABA7A">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="SavingAccounts" Type="Self.SavingAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="SavingAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suspended__Admin__3B75D760">
+          <End Role="AdminInfo" Type="Self.AdminInfo" Multiplicity="0..1" />
+          <End Role="SuspendedAccounts" Type="Self.SuspendedAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminInfo">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="SuspendedAccounts">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suspended__Clien__3A81B327">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="SuspendedAccounts" Type="Self.SuspendedAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="SuspendedAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Clien__403A8C7D">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BomDBModelStoreContainer">
+          <EntitySet Name="AdminInfo" EntityType="Self.AdminInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminLoginCred" EntityType="Self.AdminLoginCred" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ATMs" EntityType="Self.ATMs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CheckingAccounts" EntityType="Self.CheckingAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientInfo" EntityType="Self.ClientInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientLoginCred" EntityType="Self.ClientLoginCred" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CreditLineAccounts" EntityType="Self.CreditLineAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MortgageAccounts" EntityType="Self.MortgageAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SavingAccounts" EntityType="Self.SavingAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SuspendedAccounts" EntityType="Self.SuspendedAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__AdminLogi__Admin__182C9B23" Association="Self.FK__AdminLogi__Admin__182C9B23">
+            <End Role="AdminInfo" EntitySet="AdminInfo" />
+            <End Role="AdminLoginCred" EntitySet="AdminLoginCred" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CheckingA__Clien__21B6055D" Association="Self.FK__CheckingA__Clien__21B6055D">
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+            <End Role="CheckingAccounts" EntitySet="CheckingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientLog__Clien__1CF15040" Association="Self.FK__ClientLog__Clien__1CF15040">
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+            <End Role="ClientLoginCred" EntitySet="ClientLoginCred" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CreditLin__Clien__300424B4" Association="Self.FK__CreditLin__Clien__300424B4">
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+            <End Role="CreditLineAccounts" EntitySet="CreditLineAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MortgageA__Clien__2B3F6F97" Association="Self.FK__MortgageA__Clien__2B3F6F97">
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+            <End Role="MortgageAccounts" EntitySet="MortgageAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavingAcc__Clien__267ABA7A" Association="Self.FK__SavingAcc__Clien__267ABA7A">
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+            <End Role="SavingAccounts" EntitySet="SavingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suspended__Admin__3B75D760" Association="Self.FK__Suspended__Admin__3B75D760">
+            <End Role="AdminInfo" EntitySet="AdminInfo" />
+            <End Role="SuspendedAccounts" EntitySet="SuspendedAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suspended__Clien__3A81B327" Association="Self.FK__Suspended__Clien__3A81B327">
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+            <End Role="SuspendedAccounts" EntitySet="SuspendedAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Clien__403A8C7D" Association="Self.FK__Transacti__Clien__403A8C7D">
+            <End Role="ClientInfo" EntitySet="ClientInfo" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BomDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminInfo">
+          <Key>
+            <PropertyRef Name="AdminID" />
+          </Key>
+          <Property Name="AdminID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AdminLoginCreds" Relationship="Self.FK__AdminLogi__Admin__182C9B23" FromRole="AdminInfo" ToRole="AdminLoginCred" />
+          <NavigationProperty Name="SuspendedAccounts" Relationship="Self.FK__Suspended__Admin__3B75D760" FromRole="AdminInfo" ToRole="SuspendedAccounts" />
+        </EntityType>
+        <EntityType Name="AdminLoginCred">
+          <Key>
+            <PropertyRef Name="CredentialsID" />
+          </Key>
+          <Property Name="CredentialsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdPassword" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AdminInfo" Relationship="Self.FK__AdminLogi__Admin__182C9B23" FromRole="AdminLoginCred" ToRole="AdminInfo" />
+        </EntityType>
+        <EntityType Name="ATM">
+          <Key>
+            <PropertyRef Name="AtmID" />
+          </Key>
+          <Property Name="AtmID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Supply" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CheckingAccount">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ClientInfo" Relationship="Self.FK__CheckingA__Clien__21B6055D" FromRole="CheckingAccounts" ToRole="ClientInfo" />
+        </EntityType>
+        <EntityType Name="ClientInfo">
+          <Key>
+            <PropertyRef Name="ClientID" />
+          </Key>
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CheckingAccounts" Relationship="Self.FK__CheckingA__Clien__21B6055D" FromRole="ClientInfo" ToRole="CheckingAccounts" />
+          <NavigationProperty Name="ClientLoginCreds" Relationship="Self.FK__ClientLog__Clien__1CF15040" FromRole="ClientInfo" ToRole="ClientLoginCred" />
+          <NavigationProperty Name="CreditLineAccounts" Relationship="Self.FK__CreditLin__Clien__300424B4" FromRole="ClientInfo" ToRole="CreditLineAccounts" />
+          <NavigationProperty Name="MortgageAccounts" Relationship="Self.FK__MortgageA__Clien__2B3F6F97" FromRole="ClientInfo" ToRole="MortgageAccounts" />
+          <NavigationProperty Name="SavingAccounts" Relationship="Self.FK__SavingAcc__Clien__267ABA7A" FromRole="ClientInfo" ToRole="SavingAccounts" />
+          <NavigationProperty Name="SuspendedAccounts" Relationship="Self.FK__Suspended__Clien__3A81B327" FromRole="ClientInfo" ToRole="SuspendedAccounts" />
+          <NavigationProperty Name="Transactions" Relationship="Self.FK__Transacti__Clien__403A8C7D" FromRole="ClientInfo" ToRole="Transactions" />
+        </EntityType>
+        <EntityType Name="ClientLoginCred">
+          <Key>
+            <PropertyRef Name="CredewntialID" />
+          </Key>
+          <Property Name="CredewntialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="UserCode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClPassword" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ClientInfo" Relationship="Self.FK__ClientLog__Clien__1CF15040" FromRole="ClientLoginCred" ToRole="ClientInfo" />
+        </EntityType>
+        <EntityType Name="CreditLineAccount">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ClientInfo" Relationship="Self.FK__CreditLin__Clien__300424B4" FromRole="CreditLineAccounts" ToRole="ClientInfo" />
+        </EntityType>
+        <EntityType Name="MortgageAccount">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ClientInfo" Relationship="Self.FK__MortgageA__Clien__2B3F6F97" FromRole="MortgageAccounts" ToRole="ClientInfo" />
+        </EntityType>
+        <EntityType Name="SavingAccount">
+          <Key>
+            <PropertyRef Name="Account" />
+          </Key>
+          <Property Name="Account" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ClientInfo" Relationship="Self.FK__SavingAcc__Clien__267ABA7A" FromRole="SavingAccounts" ToRole="ClientInfo" />
+        </EntityType>
+        <EntityType Name="SuspendedAccount">
+          <Key>
+            <PropertyRef Name="CaseId" />
+          </Key>
+          <Property Name="CaseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AccountID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdminID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AdminInfo" Relationship="Self.FK__Suspended__Admin__3B75D760" FromRole="SuspendedAccounts" ToRole="AdminInfo" />
+          <NavigationProperty Name="ClientInfo" Relationship="Self.FK__Suspended__Clien__3A81B327" FromRole="SuspendedAccounts" ToRole="ClientInfo" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="TransactionId" />
+          </Key>
+          <Property Name="TransactionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AccountID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Outbound" Type="Boolean" Nullable="false" />
+          <Property Name="Receiver" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EventTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ClientInfo" Relationship="Self.FK__Transacti__Clien__403A8C7D" FromRole="Transactions" ToRole="ClientInfo" />
+        </EntityType>
+        <Association Name="FK__AdminLogi__Admin__182C9B23">
+          <End Role="AdminInfo" Type="Self.AdminInfo" Multiplicity="0..1" />
+          <End Role="AdminLoginCred" Type="Self.AdminLoginCred" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminInfo">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="AdminLoginCred">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suspended__Admin__3B75D760">
+          <End Role="AdminInfo" Type="Self.AdminInfo" Multiplicity="0..1" />
+          <End Role="SuspendedAccounts" Type="Self.SuspendedAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminInfo">
+              <PropertyRef Name="AdminID" />
+            </Principal>
+            <Dependent Role="SuspendedAccounts">
+              <PropertyRef Name="AdminID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CheckingA__Clien__21B6055D">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="CheckingAccounts" Type="Self.CheckingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="CheckingAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientLog__Clien__1CF15040">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="ClientLoginCred" Type="Self.ClientLoginCred" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="ClientLoginCred">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CreditLin__Clien__300424B4">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="CreditLineAccounts" Type="Self.CreditLineAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="CreditLineAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MortgageA__Clien__2B3F6F97">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="MortgageAccounts" Type="Self.MortgageAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="MortgageAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SavingAcc__Clien__267ABA7A">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="SavingAccounts" Type="Self.SavingAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="SavingAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Suspended__Clien__3A81B327">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="SuspendedAccounts" Type="Self.SuspendedAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="SuspendedAccounts">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Transacti__Clien__403A8C7D">
+          <End Role="ClientInfo" Type="Self.ClientInfo" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientInfo">
+              <PropertyRef Name="ClientID" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BomDBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminInfoes" EntityType="Self.AdminInfo" />
+          <EntitySet Name="AdminLoginCreds" EntityType="Self.AdminLoginCred" />
+          <EntitySet Name="ATMs" EntityType="Self.ATM" />
+          <EntitySet Name="CheckingAccounts" EntityType="Self.CheckingAccount" />
+          <EntitySet Name="ClientInfoes" EntityType="Self.ClientInfo" />
+          <EntitySet Name="ClientLoginCreds" EntityType="Self.ClientLoginCred" />
+          <EntitySet Name="CreditLineAccounts" EntityType="Self.CreditLineAccount" />
+          <EntitySet Name="MortgageAccounts" EntityType="Self.MortgageAccount" />
+          <EntitySet Name="SavingAccounts" EntityType="Self.SavingAccount" />
+          <EntitySet Name="SuspendedAccounts" EntityType="Self.SuspendedAccount" />
+          <EntitySet Name="Transactions" EntityType="Self.Transaction" />
+          <AssociationSet Name="FK__AdminLogi__Admin__182C9B23" Association="Self.FK__AdminLogi__Admin__182C9B23">
+            <End Role="AdminInfo" EntitySet="AdminInfoes" />
+            <End Role="AdminLoginCred" EntitySet="AdminLoginCreds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suspended__Admin__3B75D760" Association="Self.FK__Suspended__Admin__3B75D760">
+            <End Role="AdminInfo" EntitySet="AdminInfoes" />
+            <End Role="SuspendedAccounts" EntitySet="SuspendedAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CheckingA__Clien__21B6055D" Association="Self.FK__CheckingA__Clien__21B6055D">
+            <End Role="ClientInfo" EntitySet="ClientInfoes" />
+            <End Role="CheckingAccounts" EntitySet="CheckingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientLog__Clien__1CF15040" Association="Self.FK__ClientLog__Clien__1CF15040">
+            <End Role="ClientInfo" EntitySet="ClientInfoes" />
+            <End Role="ClientLoginCred" EntitySet="ClientLoginCreds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CreditLin__Clien__300424B4" Association="Self.FK__CreditLin__Clien__300424B4">
+            <End Role="ClientInfo" EntitySet="ClientInfoes" />
+            <End Role="CreditLineAccounts" EntitySet="CreditLineAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MortgageA__Clien__2B3F6F97" Association="Self.FK__MortgageA__Clien__2B3F6F97">
+            <End Role="ClientInfo" EntitySet="ClientInfoes" />
+            <End Role="MortgageAccounts" EntitySet="MortgageAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SavingAcc__Clien__267ABA7A" Association="Self.FK__SavingAcc__Clien__267ABA7A">
+            <End Role="ClientInfo" EntitySet="ClientInfoes" />
+            <End Role="SavingAccounts" EntitySet="SavingAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Suspended__Clien__3A81B327" Association="Self.FK__Suspended__Clien__3A81B327">
+            <End Role="ClientInfo" EntitySet="ClientInfoes" />
+            <End Role="SuspendedAccounts" EntitySet="SuspendedAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Transacti__Clien__403A8C7D" Association="Self.FK__Transacti__Clien__403A8C7D">
+            <End Role="ClientInfo" EntitySet="ClientInfoes" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BomDBModelStoreContainer" CdmEntityContainer="BomDBEntities1">
+          <EntitySetMapping Name="AdminInfoes">
+            <EntityTypeMapping TypeName="BomDBModel.AdminInfo">
+              <MappingFragment StoreEntitySet="AdminInfo">
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminLoginCreds">
+            <EntityTypeMapping TypeName="BomDBModel.AdminLoginCred">
+              <MappingFragment StoreEntitySet="AdminLoginCred">
+                <ScalarProperty Name="CredentialsID" ColumnName="CredentialsID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="AdPassword" ColumnName="AdPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ATMs">
+            <EntityTypeMapping TypeName="BomDBModel.ATM">
+              <MappingFragment StoreEntitySet="ATMs">
+                <ScalarProperty Name="AtmID" ColumnName="AtmID" />
+                <ScalarProperty Name="Supply" ColumnName="Supply" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CheckingAccounts">
+            <EntityTypeMapping TypeName="BomDBModel.CheckingAccount">
+              <MappingFragment StoreEntitySet="CheckingAccounts">
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientInfoes">
+            <EntityTypeMapping TypeName="BomDBModel.ClientInfo">
+              <MappingFragment StoreEntitySet="ClientInfo">
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientLoginCreds">
+            <EntityTypeMapping TypeName="BomDBModel.ClientLoginCred">
+              <MappingFragment StoreEntitySet="ClientLoginCred">
+                <ScalarProperty Name="CredewntialID" ColumnName="CredewntialID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+                <ScalarProperty Name="ClPassword" ColumnName="ClPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CreditLineAccounts">
+            <EntityTypeMapping TypeName="BomDBModel.CreditLineAccount">
+              <MappingFragment StoreEntitySet="CreditLineAccounts">
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MortgageAccounts">
+            <EntityTypeMapping TypeName="BomDBModel.MortgageAccount">
+              <MappingFragment StoreEntitySet="MortgageAccounts">
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SavingAccounts">
+            <EntityTypeMapping TypeName="BomDBModel.SavingAccount">
+              <MappingFragment StoreEntitySet="SavingAccounts">
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SuspendedAccounts">
+            <EntityTypeMapping TypeName="BomDBModel.SuspendedAccount">
+              <MappingFragment StoreEntitySet="SuspendedAccounts">
+                <ScalarProperty Name="CaseId" ColumnName="CaseId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="BomDBModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Outbound" ColumnName="Outbound" />
+                <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+                <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

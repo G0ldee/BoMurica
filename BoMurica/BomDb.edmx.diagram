@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a72308070cb44139a9a6d87039cb0714" Name="Diagram1">
+        <EntityTypeShape EntityType="BomDBModel.AdminInfo" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.AdminLoginCred" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.ATM" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.CheckingAccount" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.ClientInfo" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.ClientLoginCred" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.CreditLineAccount" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.MortgageAccount" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.SavingAccount" Width="1.5" PointX="3" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.SuspendedAccount" Width="1.5" PointX="6" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BomDBModel.Transaction" Width="1.5" PointX="3" PointY="19.875" IsExpanded="true" />
+        <AssociationConnector Association="BomDBModel.FK__AdminLogi__Admin__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__Suspended__Admin__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__CheckingA__Clien__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__ClientLog__Clien__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__CreditLin__Clien__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__MortgageA__Clien__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__SavingAcc__Clien__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__Suspended__Clien__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="BomDBModel.FK__Transacti__Clien__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

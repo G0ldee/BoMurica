@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="BoMurica.BMView.AccountTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BoMurica.BMView" xmlns:bmviewmodel="clr-namespace:BoMurica.BMViewModel" d:DataContext="{d:DesignInstance Type=bmviewmodel:AdminHomeViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="800">
+    <Grid Background="LightGray" Width="800" Height="300"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Label 
+            Grid.Row="0"
+            Margin="0 10 0 10"
+            HorizontalAlignment="Center"
+            Content="Client Management"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button
+                Grid.Column="0"
+                FontSize="16"
+                Padding="5"
+                Content="New Client Account"
+                HorizontalAlignment="Left"
+                Margin="0 10 0 0"
+                Command="{Binding OpenClientForm}"
+                />
+
+            <Button
+                Grid.Column="1"                
+                FontSize="16"
+                Padding="5"
+                Content="New Banking Account"
+                HorizontalAlignment="Right"
+                Margin="40 10 0 0"
+                Command="{Binding OpenAccountForm}"/>
+            
+            <Button
+                Grid.Column="2"                
+                FontSize="16"
+                Padding="5"
+                Content="Account State Setting"
+                HorizontalAlignment="Right"
+                Margin="40 10 0 0"
+                Command="{Binding OpenAccountState}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button
+                FontSize="16"
+                Padding="5"
+                Content="Withdraw"
+                HorizontalAlignment="Left"
+                Margin="0 10 40 0"
+                Width="150"
+                Command="{Binding OpenWithdrawMortgage}"/>
+            <Button
+                FontSize="16"
+                Padding="5"
+                Content="Transactions"
+                HorizontalAlignment="Right"
+                Margin="40 10 0 0"
+                Width="170"
+                Command="{Binding OpenListTransactions}"/>
+        </StackPanel>
+        <TextBlock 
+                HorizontalAlignment="Center"
+                Grid.Row="3"
+                Text="Update Interests"
+                Margin="0 10 0 0"/>
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button
+                FontSize="16"
+                Padding="5"
+                Content="Savings Interest"
+                HorizontalAlignment="Left"
+                Margin="0 10 40 0"
+                Width="150"
+                Command="{Binding SetInterest}"
+                CommandParameter="{Binding VarSavings}"/>
+
+            <Button
+                FontSize="16"
+                Padding="5"
+                Content="Credit  Interest"
+                HorizontalAlignment="Right"
+                Margin="40 10 0 0"
+                Width="170"
+                Command="{Binding SetInterest}"
+                CommandParameter="{Binding VarCredit}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

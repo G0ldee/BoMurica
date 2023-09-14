@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7831CD2F-82F4-4C14-86A0-8C75A6987C0A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BoMurica</RootNamespace>
+    <AssemblyName>BoMurica</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="AdminInfo.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdminLoginCred.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ATM.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BMCommands\AccountSelectionCommand.cs" />
+    <Compile Include="BMCommands\ActivateAccountCommand.cs" />
+    <Compile Include="BMCommands\CancelCommand.cs" />
+    <Compile Include="BMCommands\CommandBase.cs" />
+    <Compile Include="BMCommands\CreateAccountCommand.cs" />
+    <Compile Include="BMCommands\CreateClientCommand.cs" />
+    <Compile Include="BMCommands\DepositCommand.cs" />
+    <Compile Include="BMCommands\GenerateClientFormCommand.cs" />
+    <Compile Include="BMCommands\LoginCommand.cs" />
+    <Compile Include="BMCommands\NavigateCommand.cs" />
+    <Compile Include="BMCommands\OpenDepositViewCommand.cs" />
+    <Compile Include="BMCommands\OpenPayBillPageCommand.cs" />
+    <Compile Include="BMCommands\OpenTransferPageCommand.cs" />
+    <Compile Include="BMCommands\OpenWithdrawViewCommand.cs" />
+    <Compile Include="BMCommands\PayBillCommand.cs" />
+    <Compile Include="BMCommands\SetInterestCommand.cs" />
+    <Compile Include="BMCommands\SuspendAccountCommand.cs" />
+    <Compile Include="BMCommands\TransferCommand.cs" />
+    <Compile Include="BMCommands\UpdateAtmCommand.cs" />
+    <Compile Include="BMCommands\WithdrawCommand.cs" />
+    <Compile Include="BMModels\Account.cs" />
+    <Compile Include="BMModels\Transaction.cs" />
+    <Compile Include="BMModels\User.cs" />
+    <Compile Include="BMServices\NewAccountService.cs" />
+    <Compile Include="BMServices\TransactionService.cs" />
+    <Compile Include="BMViewModel\AccountListViewModel.cs" />
+    <Compile Include="BMViewModel\AccountStateViewModel.cs" />
+    <Compile Include="BMViewModel\AccountViewModels.cs" />
+    <Compile Include="BMViewModel\AdminHomeViewModel.cs" />
+    <Compile Include="BMViewModel\AtmStateViewModel.cs" />
+    <Compile Include="BMViewModel\BalanceViewModel.cs" />
+    <Compile Include="BMViewModel\CheckingAccoungViewModel.cs" />
+    <Compile Include="BMViewModel\CreditLineViewModel.cs" />
+    <Compile Include="BMViewModel\DepositViewModel.cs" />
+    <Compile Include="BMViewModel\LoginViewModel.cs" />
+    <Compile Include="BMViewModel\MainViewModel.cs" />
+    <Compile Include="BMViewModel\MortgageViewModel.cs" />
+    <Compile Include="BMViewModel\NewAccountViewModel.cs" />
+    <Compile Include="BMViewModel\NewClientViewModel.cs" />
+    <Compile Include="BMViewModel\PayBillViewModel.cs" />
+    <Compile Include="BMViewModel\SavingsAccountViewModel.cs" />
+    <Compile Include="BMViewModel\TransactionListViewModel.cs" />
+    <Compile Include="BMViewModel\TransferViewModel.cs" />
+    <Compile Include="BMViewModel\ViewModelBase.cs" />
+    <Compile Include="BMViewModel\ClientHomeViewModel.cs" />
+    <Compile Include="BMViewModel\WithdrawMortgageViewModel.cs" />
+    <Compile Include="BMViewModel\WithdrawViewModel.cs" />
+    <Compile Include="BMView\AccountStateView.xaml.cs">
+      <DependentUpon>AccountStateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\AccountTabView.xaml.cs">
+      <DependentUpon>AccountTabView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\AtmStateView.xaml.cs">
+      <DependentUpon>AtmStateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\DepositView.xaml.cs">
+      <DependentUpon>DepositView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\OptionsMenuView.xaml.cs">
+      <DependentUpon>OptionsMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\PayBillView.xaml.cs">
+      <DependentUpon>PayBillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\TransactionListView.xaml.cs">
+      <DependentUpon>TransactionListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMViewModel\TransactionViewModel.cs" />
+    <Compile Include="BMView\TransferView.xaml.cs">
+      <DependentUpon>TransferView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\WithdrawMortgageView.xaml.cs">
+      <DependentUpon>WithdrawMortgageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\WithdrawView.xaml.cs">
+      <DependentUpon>WithdrawView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BomDb.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CheckingAccount.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientInfo.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientLoginCred.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CreditLineAccount.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MortgageAccount.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SavingAccount.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BMServices\CurrentUserService.cs" />
+    <Compile Include="Stores\NavigationStore.cs" />
+    <Compile Include="SuspendedAccount.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transaction.cs">
+      <DependentUpon>BomDb.tt</DependentUpon>
+    </Compile>
+    <Page Include="BMView\AccountStateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\AccountTabView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\AdminHomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BMView\AtmStateView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\BalanceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BMView\ClientHomeView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BMView\DepositView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BMView\NewAccountFormView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BMView\NewClientFormView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="BMView\OptionsMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\PayBillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\TransactionListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\TransferView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\WithdrawMortgageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BMView\WithdrawView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BMView\AdminHomeView.xaml.cs">
+      <DependentUpon>AdminHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\BalanceView.xaml.cs">
+      <DependentUpon>BalanceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\ClientHomeView.xaml.cs">
+      <DependentUpon>ClientHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\NewAccountFormView.xaml.cs">
+      <DependentUpon>NewAccountFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BMView\NewClientFormView.xaml.cs">
+      <DependentUpon>NewClientFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="BomDb.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BomDb.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BomDb.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BomDb.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="BomDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BomDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="BomDb.edmx.diagram">
+      <DependentUpon>BomDb.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="BomDb.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BomDb.edmx</DependentUpon>
+      <LastGenOutput>BomDb.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BomDb.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BomDb.edmx</DependentUpon>
+      <LastGenOutput>BomDb.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
